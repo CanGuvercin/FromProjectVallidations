@@ -1,36 +1,42 @@
 import { useState } from 'react';
 
 export default function Login() {
-  // const [enteredEmail, setEnteredEmail] = useState('');
-  // const [enteredPassword, setEnteredPassword] = useState('');
   const [enteredValues, setEnteredValues] = useState({
     email: '',
     password: '',
   });
+  // değer girildi mi state'i
+
 
   const [didEdit, setDidEdit] = useState({
     email: false,
     password: false,
   });
+  // editlendi mi state'i
 
   const emailIsInvalid = didEdit.email && !enteredValues.email.includes('@');
+  // yukarıdaki state'de email true oldu mu ve email'de @ var mı?
+
 
   function handleSubmit(event) {
     event.preventDefault();
-
     console.log(enteredValues);
   }
+  // prevent default ile formun broswer tarafından gönderilmesini engelliyoruz.
+
 
   function handleInputChange(identifier, value) {
     setEnteredValues((prevValues) => ({
       ...prevValues,
       [identifier]: value,
     }));
+    // varsa önceki değerleri koru, yoksa yeni değerleri ata, indetifier ile hangi değeri güncelleyeceğimizi belirliyoruz.
     setDidEdit((prevEdit) => ({
       ...prevEdit,
       [identifier]: false,
     }));
   }
+  //
 
   function handleInputBlur(identifier) {
     setDidEdit((prevEdit) => ({
@@ -38,18 +44,15 @@ export default function Login() {
       [identifier]: true,
     }));
   }
+  //burada identifier ile hangi değerin editlendiğini
+  //belirliyoruz ve didEdit state'ini önceki değeri fark etmeksizin
+  //true olarak güncelliyoruz.
 
-  // function handleEmailChange(event) {
-  //   setEnteredEmail(event.target.value);
-  // }
-
-  // function handlePasswordChange(event) {
-  //   setEnteredPassword(event.target.value);
-  // }
+ 
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>Login</h2>
+      <h1>Login</h1>
 
       <div className="control-row">
         <div className="control no-margin">
